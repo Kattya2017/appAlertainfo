@@ -18,7 +18,7 @@ const LogoComponent = ({titulo,subtitulo}:Props) => {
         >
             <Image
                 style={style.imagenLogo}
-                source={require('../assets/img/municipalidad.png')}
+                source={require('../assets/img/logo.png')}
             />
         </View>
         <Text

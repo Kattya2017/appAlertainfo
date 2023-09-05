@@ -1,14 +1,39 @@
-import React from 'react'
-import { View, StyleSheet, Dimensions, TextInput, TouchableOpacity, Text } from 'react-native';
+import React, {useContext, useEffect} from 'react'
+import { View, StyleSheet, Dimensions, TextInput, TouchableOpacity, Text, Keyboard, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import LogoComponent from '../components/LogoComponent';
 import FondoComponent from '../components/FondoComponent';
+import { StackScreenProps } from '@react-navigation/stack';
+import { useForm } from '../hooks/useForm';
+import AuthContext from '../context/AuthContext';
 
 const {width,height} = Dimensions.get('window');
+interface Props extends StackScreenProps<any, any>{};
+
+const LoginScreen = ({ navigation }:Props) => {
+
+  const {singIn, errorMessage, removeError} = useContext(AuthContext);
+
+  const {dni, password, onChange} = useForm({
+    dni:'',
+    password:'',
+  });
+
+  useEffect(()=>{
+    if(errorMessage.length === 0) return;
+    Alert.alert('Login incorrecto', errorMessage,[
+      { text: 'Ok', onPress: removeError}])
+  }, [errorMessage])
+    
+
+  const onRegister = ()=>{
+    console.log(dni, password);
+    Keyboard.dismiss();
+    singIn({dni, password});
+  };
 
 
-const LoginScreen = () => {
   return (
     <View
       style={style.container}
@@ -30,6 +55,9 @@ const LoginScreen = () => {
             placeholderTextColor={'#969FAA'}
             maxLength={8}
             keyboardType='numeric'
+            onChangeText={(value)=>onChange(value,'dni')}
+            value={dni}
+            
           />
           <Icon
             name='card'
@@ -46,9 +74,11 @@ const LoginScreen = () => {
             style={style.textInput}
             placeholderTextColor={'#969FAA'}
             secureTextEntry={true}
+            onChangeText={(value)=>onChange(value,'password')}
+            value={password}
           />
           <Icon
-            name='key-sharp'
+            name='lock-closed'
             color={'#004F79'}
             size={45}
             style={style.iconText}
@@ -57,13 +87,14 @@ const LoginScreen = () => {
         </View>
         <TouchableOpacity
             style={style.btnLogin}
+            onPress={onRegister}
           >
             <Text
-              style={style.textBtn}
-            >INICIAR SESION</Text>
+              style={style.textBtn}>INICIAR SESION</Text>
           </TouchableOpacity>
         <TouchableOpacity
           style={style.btnLinkDni}
+          onPress={()=> navigation.navigate('DNI')}
         >
           <Text style={style.textCuenta}>No tienes una cuenta? </Text>
           <Text style={style.textLink}>Registrate ahora</Text>
