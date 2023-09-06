@@ -7,19 +7,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useForm } from '../hooks/useForm';
 import AuthContext from '../context/AuthContext';
+import { RootStackParams } from '../navigation/StackNavigator';
 
 const {width,height} = Dimensions.get('window');
-interface Props extends StackScreenProps<any, any>{};
+interface Props extends StackScreenProps<RootStackParams, 'Register'>{};
 
-const RegisterScreen = ({navigation}:Props) => {
+const RegisterScreen = ({navigation,route}:Props) => {
 
   const {singUp, errorMessage, removeError} = useContext(AuthContext);
   
 
   const {nombre, apellido, dni, password, form, onChange} = useForm({
-    nombre:'',
-    apellido:'',
-    dni:'',
+    nombre:route.params.nombre,
+    apellido:route.params.apellido,
+    dni:route.params.dni,
     password:''
   });
 
@@ -31,8 +32,14 @@ const RegisterScreen = ({navigation}:Props) => {
     }]);
   })
 
-  const onLogin = () =>{
+  const onRegister = () =>{
     console.log(nombre, apellido, dni, password);
+    if (password==='') {
+      return Alert.alert('Datos imcompletos','Porfavor complete el campo Contraseña para registrar sus datos')
+    }
+    else if (password.length<6) {
+      return Alert.alert('Datos imcompletos','La contraseña debe tener mas de 6 digitos')
+    }
     Keyboard.dismiss();
     singUp({
       nombre,
@@ -56,7 +63,8 @@ const RegisterScreen = ({navigation}:Props) => {
             placeholder='Ingrese DNI'
             style={style.textInput3}
             placeholderTextColor={'#969FAA'}
-            //editable={false}
+            editable={false}
+            value={dni}
           />
           <Icon
             name='card'
@@ -71,7 +79,8 @@ const RegisterScreen = ({navigation}:Props) => {
             placeholder='Ingrese nombre'
             style={style.textInput3}
             placeholderTextColor={'#969FAA'}
-            //editable={false}
+            editable={false}
+            value={nombre}
           />
           <Icon
             name='person'
@@ -86,7 +95,8 @@ const RegisterScreen = ({navigation}:Props) => {
               placeholder='Ingrese apellido'
               style={style.textInput3}
               placeholderTextColor={'#969FAA'}
-              //editable={false}
+              editable={false}
+              value={apellido}
             />
             <Icon
               name='person'
@@ -101,6 +111,8 @@ const RegisterScreen = ({navigation}:Props) => {
               style={style.textInput3}
               placeholderTextColor={'#969FAA'}
               secureTextEntry={true}
+              onChangeText={(value)=>onChange(value,'password')}
+              value={password}
             />
             <Icon
               name='lock-closed'
@@ -109,9 +121,12 @@ const RegisterScreen = ({navigation}:Props) => {
               style={style.iconText3}
             />
           </View>
-          <TouchableOpacity style={style.btnRegister}>
+          <TouchableOpacity 
+            style={style.btnRegister}
+            onPress={onRegister}
+          >
             <Text style={style.textBtn3}
-            onPress={onLogin}
+            
             >REGISTRARSE</Text>
           </TouchableOpacity>
         

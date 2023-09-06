@@ -10,8 +10,18 @@ import DniScreen from '../screens/DniScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 
-const Stack = createStackNavigator();
 
+
+export type RootStackParams = {
+  Login:undefined,
+  DNI:undefined,
+  Register:{
+    dni:string,
+    nombre:string,
+    apellido:string
+  }
+}
+const Stack = createStackNavigator<RootStackParams>();
 const StackNavigator=()=> {
 
   const {status} = useContext(AuthContext);

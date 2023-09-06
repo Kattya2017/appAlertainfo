@@ -94,13 +94,20 @@ export const AuthProvider = ({ children } : any) => {
 
     const singUp = async({nombre, apellido, password, dni}:RegisterUser) => {
         try {
-            const {data} = await alertainfoApi.post<LoginResponse>('/administrado', {nombre, apellido, password, dni});
-            await AsyncStorage.setItem('token', data.token);
-            dispatch({
+            const resp = await alertainfoApi.post('/administrado', {nombre, apellido, password, dni});
+            console.log(resp.data);
+            if (!resp.data.ok) {
+                dispatch({
+                    type: 'addError',
+                    payload: resp.data.msg || 'Revise la información'
+                });
+            }
+            await AsyncStorage.setItem('token', resp.data.token);
+           dispatch({
                 type: 'signUp',
                 payload: {
-                    token: data.token,
-                    user: data.user
+                    token: resp.data.token,
+                    user: resp.data.user
                 }
             });
         } catch (error:any) {
