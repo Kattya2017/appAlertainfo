@@ -45,7 +45,7 @@ export const AuthProvider = ({ children } : any) => {
         // hay token
         if (token) {
             try {
-                const resp = await alertainfoApi.get('/auth');
+                const resp = await alertainfoApi.get('/auth/administrado');
                 console.log(resp.data);
 
                 if (resp.status !== 200) {

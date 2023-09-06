@@ -9,6 +9,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import DniScreen from '../screens/DniScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
+import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
 
 
 
@@ -19,7 +20,10 @@ export type RootStackParams = {
     dni:string,
     nombre:string,
     apellido:string
-  }
+  },
+  Home: undefined,
+  Drawer: undefined,
+  EnviarAlerta: undefined,
 }
 const Stack = createStackNavigator<RootStackParams>();
 const StackNavigator=()=> {
@@ -51,6 +55,7 @@ const StackNavigator=()=> {
         (
           <>
           <Stack.Screen name='Home' component={HomeScreen}/>
+          <Stack.Screen name='EnviarAlerta' component={EnviarAlertaScreen}/>
           </>
         )
       }

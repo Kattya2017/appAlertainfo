@@ -1,34 +1,84 @@
-import React, {useContext} from 'react'
-import { View, Dimensions, StyleSheet, Text, Button } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react'
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import FondoComponent from '../components/FondoComponent';
-import AuthContext from '../context/AuthContext';
+import { ScrollView } from 'react-native-gesture-handler';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParams } from '../navigation/StackNavigator';
+import alertainfoApi from '../api/alertainfoApi';
+import { ResultTipoAlertas, Resp } from '../interfaces/tipoAlertaInterface';
+import BtnAlertas from '../components/BtnAlertas';
+import { Row, Col } from 'react-native-flex-grid';
 
-const {width, height} = Dimensions.get('window');
-interface Props extends StackScreenProps<any, any>{};
+const { width, height } = Dimensions.get('window');
 
-const HomeScreen = ({navigation}:Props) => {
+interface Props extends StackScreenProps<RootStackParams> { };
 
-  const {user, token, logOut} = useContext(AuthContext);
+const HomeScreen = ({ navigation }: Props) => {
 
+  const [listTipoAlerta, setListTipoAlerta] = useState<Resp[]>([]);
+  const [carga, setCarga] = useState<boolean>(false);
+  useEffect(() => {
+    mostrarTipoAlerta();
+  }, []);
+
+  useEffect(()=>{
+    navigation.setOptions({
+      header: () => (
+        <View>
+          <TouchableOpacity>
+          <Image
+            source={require('../assets/img/menu/options.png')}
+            style={{ width:40, height:40 }}
+          />
+          </TouchableOpacity>
+          <Image
+            source={require('../assets/img/menu/barra.png')}
+            style={{ width:110, height:50, left:85 }}
+          />
+        </View>
+      )
+    })
+  },[]);
+
+
+  const mostrarTipoAlerta = async () => {
+    try {
+      const resp = await alertainfoApi.get<ResultTipoAlertas>('/tipoalerta', { params: { estado: 1 } });
+      console.log(resp.data);
+      setListTipoAlerta(resp.data.resp);
+      console.log(listTipoAlerta);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   return (
     <View style={style.container}>
-        <FondoComponent/>
-        <View style={style.containeGeneral}>
-          <Text style={style.title}>Hola mundo</Text>
-          <Button
-            title="Cerrar Sesion"
-            color='#004F79'
-            onPress={logOut}
-          />
-          <Text>
-            {JSON.stringify(user, null, 5)}
-          </Text>
-          <Text>
-            {token}
-          </Text>
+      <FondoComponent />
+      <ScrollView>
+        <View style={style.containerBtn}>
+        <Row style={{ padding: 15 }}>
+            {
+              listTipoAlerta.map((resp,index)=>{
+                return(
+                  <Col
+                    key={resp.id}
+                    xs= "6"
+                    sm= "6"
+                    style={{marginBottom:15}}
+                  >
+                  <BtnAlertas
+                  onPres={()=>navigation.navigate('EnviarAlerta')}
+                    descripcion={resp.descripcion}
+                  />
+                  </Col>
+                )
+              })
+            }
+          </Row>
         </View>
+      </ScrollView>
     </View>
 
   )
@@ -37,24 +87,21 @@ const HomeScreen = ({navigation}:Props) => {
 export default HomeScreen;
 
 const style = StyleSheet.create({
-  container:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  containeGeneral:{
+  containeGeneral: {
+    //backgroundColor: 'red',
     width,
-    alignItems:'center'
+    alignItems: 'center'
   },
-  containerBtn:{
-    marginTop:5,
+  containerBtn: {
+    //backgroundColor: 'red',
+    marginTop: 70,
     width,
-    justifyContent:'center',
-    alignItems:'center',
-    top:10
-  },
-  title:{
-    fontSize: 20,
-    marginBottom: 20
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
