@@ -10,6 +10,7 @@ import DniScreen from '../screens/DniScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
+import { MenuLateralBasico } from './MenuLateralBasico';
 
 
 
@@ -22,7 +23,6 @@ export type RootStackParams = {
     apellido:string
   },
   Home: undefined,
-  Drawer: undefined,
   EnviarAlerta: undefined,
 }
 const Stack = createStackNavigator<RootStackParams>();

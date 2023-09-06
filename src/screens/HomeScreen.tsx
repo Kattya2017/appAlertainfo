@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 
 import FondoComponent from '../components/FondoComponent';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,10 +9,12 @@ import alertainfoApi from '../api/alertainfoApi';
 import { ResultTipoAlertas, Resp } from '../interfaces/tipoAlertaInterface';
 import BtnAlertas from '../components/BtnAlertas';
 import { Row, Col } from 'react-native-flex-grid';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 const { width, height } = Dimensions.get('window');
 
-interface Props extends StackScreenProps<RootStackParams> { };
+//interface Props extends StackScreenProps<RootStackParams> { };
+interface Props extends DrawerScreenProps<RootStackParams> { };
 
 const HomeScreen = ({ navigation }: Props) => {
 
@@ -22,25 +24,16 @@ const HomeScreen = ({ navigation }: Props) => {
     mostrarTipoAlerta();
   }, []);
 
-  useEffect(()=>{
-    navigation.setOptions({
-      header: () => (
-        <View>
-          <TouchableOpacity>
-          <Image
-            source={require('../assets/img/menu/options.png')}
-            style={{ width:40, height:40 }}
-          />
-          </TouchableOpacity>
-          <Image
-            source={require('../assets/img/menu/barra.png')}
-            style={{ width:110, height:50, left:85 }}
-          />
-        </View>
-      )
-    })
-  },[]);
+  useEffect(()=>{ navigation.setOptions({
+    headerLeft: () => (
+      <Button
+        title="Menu"
+        onPress={()=>navigation.toggleDrawer()}
+      />
+    )
+  })
 
+  }, [])
 
   const mostrarTipoAlerta = async () => {
     try {
