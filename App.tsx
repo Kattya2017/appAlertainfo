@@ -2,9 +2,8 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigation/StackNavigator';
 import { AuthProvider } from './src/context/AuthContext';
-import { MenuLateralBasico } from './src/navigation/MenuLateralBasico';
 
-const AppState = ({children}:any) =>{
+const AppState = ({ children }: any) => {
   return (
     <AuthProvider>
       {children}
@@ -16,10 +15,9 @@ const AppState = ({children}:any) =>{
 const App = () => {
   return (
     <NavigationContainer>
-      <MenuLateralBasico/>
       <AppState>
-      {/*<StackNavigator/>*/}
-  </AppState>
+        <StackNavigator />
+      </AppState>
     </NavigationContainer>
   )
 }

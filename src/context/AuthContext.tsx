@@ -46,7 +46,7 @@ export const AuthProvider = ({ children } : any) => {
         if (token) {
             try {
                 const resp = await alertainfoApi.get('/auth/administrado');
-                console.log(resp.data);
+                console.log(resp.status);
 
                 if (resp.status !== 200) {
                     return dispatch({

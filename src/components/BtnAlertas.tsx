@@ -14,6 +14,7 @@ const BtnAlertas = ({descripcion, onPres}: Props) => {
 
     if (descripcion) {
         constante = <Text style={style.btnText}>{descripcion}</Text>
+        
     }else{
         constante
     }
@@ -54,13 +55,14 @@ const style = StyleSheet.create({
         elevation: 10,
     },
     iconBtn:{
-        width: '60%',
-        height: '60%'
+        width: '55%',
+        height: '55%'
     },
     btnText:{
-        color: 'black',
-        fontSize:7,
-        fontFamily:'Roboto-Bold',
-        marginTop:5,
+        color: '#004F79',
+        fontSize:10,
+        fontFamily:'Roboto-bold',
+        fontWeight:'bold',
+        marginTop:7,
     },
 });

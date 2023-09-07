@@ -11,6 +11,7 @@ import HomeScreen from '../screens/HomeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
 import { MenuLateralBasico } from './MenuLateralBasico';
+import AlertasScreen from '../screens/AlertasScreen';
 
 
 
@@ -22,10 +23,12 @@ export type RootStackParams = {
     nombre:string,
     apellido:string
   },
-  Home: undefined,
-  EnviarAlerta: undefined,
+  Menu:undefined,
+  Home:undefined,
+  Alertas: undefined,
 }
 const Stack = createStackNavigator<RootStackParams>();
+
 const StackNavigator=()=> {
 
   const {status} = useContext(AuthContext);
@@ -38,7 +41,7 @@ const StackNavigator=()=> {
       screenOptions={{
         headerShown:false,
         cardStyle:{
-          backgroundColor:'#fff'
+          //backgroundColor:'#004F79'
         }
       }}
     >
@@ -54,8 +57,10 @@ const StackNavigator=()=> {
         ):
         (
           <>
+          <Stack.Screen name='Menu' component={MenuLateralBasico}/>
           <Stack.Screen name='Home' component={HomeScreen}/>
           <Stack.Screen name='EnviarAlerta' component={EnviarAlertaScreen}/>
+          <Stack.Screen name='Alertas' component={AlertasScreen}/>
           </>
         )
       }
