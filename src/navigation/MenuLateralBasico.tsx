@@ -9,9 +9,20 @@ import MenuInternoComponent from '../components/MenuInternoComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AlertasScreen from '../screens/AlertasScreen';
 import MisAlertasScreen from '../screens/MisAlertasScreen';
+import SedeScreen from '../screens/SedeScreen';
 
+export type RootDrawerParams = {
+  Home:undefined,
+  EnviarAlerta:{
+    tipo_alerta:number,
+    tipo_area:number,
+    area:number
+  },
+  Misalertas:undefined,
+  Sede:undefined
+}
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<RootDrawerParams>();
 
 export const MenuLateralBasico = () => {
   return (
@@ -30,7 +41,7 @@ export const MenuLateralBasico = () => {
           )
         }} />
 
-      <Drawer.Screen name="Enviar Alerta" component={EnviarAlertaScreen}
+      <Drawer.Screen name="EnviarAlerta" component={EnviarAlertaScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="paper-plane-sharp" size={22} color={color} />
@@ -38,14 +49,20 @@ export const MenuLateralBasico = () => {
         }}
       />
 
-      <Drawer.Screen name="Mis alertas" component={MisAlertasScreen}
+      <Drawer.Screen name="Misalertas" component={MisAlertasScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="notifications-sharp" size={22} color={color} />
           )
         }}
       />
-
+      <Drawer.Screen name="Sede" component={SedeScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="notifications-sharp" size={22} color={color} />
+          )
+        }}
+      />
     </Drawer.Navigator>
   );
 }

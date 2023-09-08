@@ -11,4 +11,6 @@ export interface Resp {
     dni:      string;
     apellido: string;
     nombre:   string;
+    tipo_area?: string;
+    area?:string
 }

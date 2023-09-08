@@ -3,8 +3,6 @@ import { LoginData, LoginResponse, RegisterUser, User } from '../interfaces/logi
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthState, authReducer } from "./AuthReduce";
 import alertainfoApi from "../api/alertainfoApi";
-import { ResultLogin } from '../../../appalertaciudadana-main/src/interfaces/login.interface';
-import { Keyboard } from 'react-native';
 
 
 type AuthContextProps = {

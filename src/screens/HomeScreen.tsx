@@ -7,12 +7,13 @@ import alertainfoApi from '../api/alertainfoApi';
 import { ResultTipoAlertas, Resp } from '../interfaces/tipoAlertaInterface';
 import BtnAlertas from '../components/BtnAlertas';
 import { Row, Col } from 'react-native-flex-grid';
+import { RootDrawerParams } from '../navigation/MenuLateralBasico';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 
 const { width, height } = Dimensions.get('window');
 
 //interface Props extends StackScreenProps<RootStackParams> { };
-interface Props extends DrawerScreenProps<any,any> { };
+interface Props extends DrawerScreenProps<RootDrawerParams,'Home'> { };
 
 const HomeScreen = ({ navigation }: Props) => {
 
@@ -22,7 +23,7 @@ const HomeScreen = ({ navigation }: Props) => {
     mostrarTipoAlerta();
   }, []);
 
-  useEffect(()=>{ navigation.setOptions({
+/*   useEffect(()=>{ navigation.setOptions({
     headerLeft: () => (
       <View style={style.containerBarra}>
         <Image
@@ -33,8 +34,24 @@ const HomeScreen = ({ navigation }: Props) => {
     ),
     drawerPosition:'left',
   });
-  }, []);
+  }, []); */
 
+  const verificarDatos =async(id_alerta:number)=>{
+    try {
+      const resp = await alertainfoApi.get('/administrado/validar/sede');
+      if (!resp.data.resp.tipo_area) {
+        navigation.navigate('Sede');
+      }else{
+        navigation.navigate('EnviarAlerta',{area:resp.data.resp.area,tipo_area:resp.data.resp.tipo_area, tipo_alerta:id_alerta});
+        
+      }
+      
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 
 
   const mostrarTipoAlerta = async () => {
@@ -64,7 +81,7 @@ const HomeScreen = ({ navigation }: Props) => {
                     style={{marginBottom:15}}
                   >
                   <BtnAlertas
-                  onPres={()=>navigation.navigate('EnviarAlerta')}
+                    onPres={()=>verificarDatos(resp.id)}
                     descripcion={resp.descripcion}
                   />
                   </Col>

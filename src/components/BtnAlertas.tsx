@@ -53,6 +53,7 @@ const style = StyleSheet.create({
         shadowRadius: 6.27,
     
         elevation: 10,
+        
     },
     iconBtn:{
         width: '55%',
@@ -64,5 +65,7 @@ const style = StyleSheet.create({
         fontFamily:'Roboto-bold',
         fontWeight:'bold',
         marginTop:7,
+        width:'80%',
+        textAlign:'center'
     },
 });
