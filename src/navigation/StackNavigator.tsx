@@ -59,7 +59,6 @@ const StackNavigator=()=> {
           <>
           <Stack.Screen name='Menu' component={MenuLateralBasico}/>
           <Stack.Screen name='Home' component={HomeScreen}/>
-          <Stack.Screen name='EnviarAlerta' component={EnviarAlertaScreen}/>
           <Stack.Screen name='Alertas' component={AlertasScreen}/>
           </>
         )

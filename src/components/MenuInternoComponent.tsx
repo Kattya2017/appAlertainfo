@@ -9,7 +9,7 @@ const MenuInternoComponent = (props: DrawerContentComponentProps) => {
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: '#004F79' }}>
-                <ImageBackground source={require('../assets/img/fondo-3.jpg')} style={{ padding: 10, alignItems: 'center' }}>
+                <ImageBackground source={require('../assets/img/fondo-4.jpg')} style={{ padding: 10, alignItems: 'center' }}>
                     <Image source={require('../assets/img/logo-lateral.png')}
                         style={{ width: 100, height: 100, marginBottom: 5 }} />
                     <Text style={{ color: '#fff', fontSize: 18, fontFamily: 'Roboto-Medium' }}>INFORMATICA SOS</Text>

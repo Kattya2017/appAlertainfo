@@ -67,7 +67,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
         style={{
           position: 'absolute',
           width: '95%',
-          height: '95%',
+          height: '75%',
           backgroundColor: '#fff',
           borderRadius: 10,
           borderColor: '#004F79',
@@ -77,10 +77,10 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
       </View>
       <View
         style={{
-          width: '90%',
-          height: 200,
+          width: '85%',
+          height: 120,
           alignItems: 'center',
-          marginTop: 20
+          marginTop: 100
         }}
       >
         <Text style={{ fontFamily: 'Roboto-Bold', fontSize: 20, bottom: 20, color: '#004F79', marginTop: 30 }} >Soporte Tecnico de Impresora</Text>
@@ -88,29 +88,29 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
           <View style={style.titleText}>
             {
               sede !== '' ? <>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 10 }}>* SEDE: </Text>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 10 }}>{sede} </Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }}>* SEDE: </Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }}>{sede} </Text>
               </> : ''
             }
             {
               organo !== '' ? <>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 10 }} >* ORGANO:</Text>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 10 }}>{organo} </Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* ORGANO:</Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }}>{organo} </Text>
               </> : ''
             }
             {
               unidad !== '' ?
                 <>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 10 }} >* UND. ORGANICA:</Text>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 10 }} >{unidad}</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* UND. ORGANICA:</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }} >{unidad}</Text>
                 </>
                 : ''
             }
             {
               area !== '' ?
                 <>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 10 }} >* AREA:</Text>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 10 }} >{area}</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* AREA:</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }} >{area}</Text>
                 </>
                 : ''
             }
@@ -121,7 +121,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
       <View
         style={{
           flex: 1,
-          width:'90%',
+          width:'85%',
           marginTop: 50
         }}
       >
@@ -129,7 +129,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
           style={{
             width: '100%',
             backgroundColor: '#fff',
-            height:150,
+            height:120,
             borderRadius:10,
             borderColor:'#004F79',
             borderWidth:1,
@@ -157,9 +157,9 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
             marginTop:10
           }}
         >
-          <Image style={style.img2}
+          {/*<Image style={style.img2}
               source={require('../assets/img/alerta.png')}
-            />
+        />*/}
         </View>
         <View>
             <Text style={{
@@ -256,9 +256,11 @@ const style = StyleSheet.create({
   img3: {
     width: 105,
     height: 55,
+    borderRadius:10
   },
   img4: {
     width: 105,
     height: 55,
+    borderRadius:10
   }
 });
