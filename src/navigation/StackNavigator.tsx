@@ -15,6 +15,7 @@ import AlertasScreen from '../screens/AlertasScreen';
 
 
 
+
 export type RootStackParams = {
   Login:undefined,
   DNI:undefined,

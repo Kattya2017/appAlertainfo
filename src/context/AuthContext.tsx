@@ -45,7 +45,8 @@ export const AuthProvider = ({ children } : any) => {
             try {
                 const resp = await alertainfoApi.get('/auth/administrado');
                 console.log(resp.status);
-
+                console.log(resp.data.token);
+                
                 if (resp.status !== 200) {
                     return dispatch({
                     type: 'notAuthenticated'});
