@@ -7,10 +7,10 @@ import HomeScreen from '../screens/HomeScreen';
 import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
 import MenuInternoComponent from '../components/MenuInternoComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AlertasScreen from '../screens/AlertasScreen';
 import MisAlertasScreen from '../screens/MisAlertasScreen';
 import SedeScreen from '../screens/SedeScreen';
 import StackAlertaNavigator from './StackAlertaNavigator';
+import MiperfilScreen from '../screens/MiperfilScreen';
 
 export type RootDrawerParams = {
   Inicio:undefined,
@@ -64,7 +64,14 @@ export const MenuLateralBasico = () => {
       <Drawer.Screen name="Sede" component={SedeScreen}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="notifications-sharp" size={22} color={color} />
+            <Ionicons name="location-sharp" size={22} color={color} />
+          )
+        }}
+      />
+      <Drawer.Screen name="Perfil" component={MiperfilScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="person-sharp" size={22} color={color} />
           )
         }}
       />

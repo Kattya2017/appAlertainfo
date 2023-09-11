@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -11,22 +11,22 @@ import {
 } from 'react-native';
 
 import FondoComponent from '../components/FondoComponent';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import alertainfoApi from '../api/alertainfoApi';
-import {ResultTipoAlertas, Resp} from '../interfaces/tipoAlertaInterface';
+import { ResultTipoAlertas, Resp } from '../interfaces/tipoAlertaInterface';
 import BtnAlertas from '../components/BtnAlertas';
-import {Row, Col} from 'react-native-flex-grid';
-import {RootDrawerParams} from '../navigation/MenuLateralBasico';
-import {DrawerScreenProps} from '@react-navigation/drawer';
-import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParamsAlerta} from '../navigation/StackAlertaNavigator';
+import { Row, Col } from 'react-native-flex-grid';
+import { RootDrawerParams } from '../navigation/MenuLateralBasico';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamsAlerta } from '../navigation/StackAlertaNavigator';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-interface Props extends StackScreenProps<RootStackParamsAlerta, 'Home'> {}
+interface Props extends StackScreenProps<RootStackParamsAlerta, 'Home'> { }
 //interface Props extends DrawerScreenProps<RootDrawerParams,'Inicio'> { };
 
-const HomeScreen = ({navigation}: Props) => {
+const HomeScreen = ({ navigation }: Props) => {
   const [listTipoAlerta, setListTipoAlerta] = useState<Resp[]>([]);
   const [carga, setCarga] = useState<boolean>(false);
   useEffect(() => {
@@ -46,7 +46,7 @@ const HomeScreen = ({navigation}: Props) => {
   });
   }, []); */
 
-  const verificarDatos = async (id_alerta: number,titulo:string) => {
+  const verificarDatos = async (id_alerta: number, titulo: string) => {
     try {
       const resp = await alertainfoApi.get('/administrado/validar/sede');
       if (!resp.data.resp.tipo_area) {
@@ -70,7 +70,7 @@ const HomeScreen = ({navigation}: Props) => {
   const mostrarTipoAlerta = async () => {
     try {
       const resp = await alertainfoApi.get<ResultTipoAlertas>('/tipoalerta', {
-        params: {estado: 1},
+        params: { estado: 1 },
       });
       console.log(resp.data);
       setListTipoAlerta(resp.data.resp);
@@ -85,12 +85,12 @@ const HomeScreen = ({navigation}: Props) => {
       <FondoComponent />
       <ScrollView>
         <View style={style.containerBtn}>
-          <Row style={{padding: 15}}>
+          <Row style={{ padding: 15 }}>
             {listTipoAlerta.map((resp, index) => {
               return (
-                <Col key={resp.id} xs="6" sm="6" style={{marginBottom: 15}}>
+                <Col key={resp.id} xs="6" sm="6" style={{ marginBottom: 15 }}>
                   <BtnAlertas
-                    onPres={() => verificarDatos(resp.id,resp.descripcion)}
+                    onPres={() => verificarDatos(resp.id, resp.descripcion)}
                     descripcion={resp.descripcion}
                   />
                 </Col>

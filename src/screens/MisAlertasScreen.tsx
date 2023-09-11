@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {StackScreenProps} from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
 
-import {StyleSheet, View, Dimensions, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Image} from 'react-native';
-import {Resp, ResultAlertas} from '../interfaces/alerta.interface';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Image } from 'react-native';
+import { Resp, ResultAlertas } from '../interfaces/alerta.interface';
 import alertainfoApi from '../api/alertainfoApi';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-interface Props extends StackScreenProps<any, any> {}
+interface Props extends StackScreenProps<any, any> { }
 
-const MisAlertasScreen = ({navigation}: Props) => {
+const MisAlertasScreen = ({ navigation }: Props) => {
   const [listAlertas, setListAlertas] = useState<Resp[]>([]);
 
   useEffect(() => {
@@ -32,6 +32,19 @@ const MisAlertasScreen = ({navigation}: Props) => {
     }
   };
 
+  const iniciarAlerta = async () =>{
+    try {
+    } catch (error) {
+      console.log(error);
+      
+    }
+  };
+
+
+  const terminarAlerta = async () =>{
+  };
+  
+
   return (
     <View style={style.container}>
       <FondoComponent />
@@ -40,53 +53,51 @@ const MisAlertasScreen = ({navigation}: Props) => {
           flex: 1,
           width,
           height,
-          marginTop:20
+          marginTop: 20
         }}>
         {listAlertas.map((resp, index) => {
           return (
-            <View 
+            <View
               key={resp.id}
               style={{
-                width:'100%',
-                height:160,
-                justifyContent:'center',
-                alignItems:'center',
-                marginBottom:10
+                width: '100%',
+                height: 160,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: 10,
               }}
             >
               <View style={style.containerBtn}>
                 <View style={style.imageAlertas}>
                   <Image
                     source={require('../assets/img/alerta/computadora-soporte.png')}
-                    style={{width: '75%', height: '45%'}}
+                    style={{ width: '75%', height: '45%' }}
                   />
                 </View>
-                <View
-                  style={style.viewText}
-                >
+                <View style={style.viewText} >
                   <Text style={style.textAlerta}>
                     {resp.TipoAlertum.descripcion}
                   </Text>
+                  
                   <Text style={style.textDescripcion}>
-                    {resp.descripcion.slice(0,40)}
+                    {resp.descripcion.slice(0, 50)}
                   </Text>
-                  <View
-                    style={style.viewBtn}
-                  >
-                    <TouchableOpacity
-                      style={{...style.btn,backgroundColor:'blue'}}
-                    >
+                  
+                  <Text style={style.textFecha}>
+                    {resp.fecha}
+                  </Text>
+
+                  <View style={style.viewBtn} >
+                    <TouchableOpacity style={{ ...style.btn, backgroundColor: '#009F0B' }} >
                       <Icon
                         name='checkmark-sharp'
-                        size={50}
+                        size={30} color={'white'}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{...style.btn,backgroundColor:'red'}}
-                    >
+                    <TouchableOpacity style={{ ...style.btn, backgroundColor: 'red' }} >
                       <Icon
                         name='close-sharp'
-                        size={50}
+                        size={30} color={'white'}
                       />
                     </TouchableOpacity>
                   </View>
@@ -121,47 +132,60 @@ const style = StyleSheet.create({
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
     elevation: 5,
-    flexDirection:'row'
+    flexDirection: 'row'
   },
   imageAlertas: {
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     width: '30%',
     height: '100%',
   },
-  viewText:{
-    width:'70%',
-    height:'100%',
+  viewText: {
+    width: '70%',
+    height: '100%',
   },
-  textAlerta:{
-    color:'black',
-    fontWeight:'bold',
-    width:'100%',
-    marginTop:5
+  textAlerta: {
+    color: '#004F79',
+    width: '100%',
+    marginTop: 10,
+    fontWeight:'900',
   },
-  textDescripcion:{
-    color:'black',
-    width:'100%',
-    marginTop:5,
-    fontSize:12
+  textDescripcion: {
+    //backgroundColor:'blue',
+    color: 'black',
+    width: '100%',
+    height: '20%',
+    marginTop: 5,
+    fontSize: 14,
   },
-  viewBtn:{
-    width:'100%',
-    flexDirection:'row',
-    marginTop:15,
-    justifyContent:'space-evenly',
-    right:15,
+  textFecha: {
+    //backgroundColor:'blue',
+    color: '#004F79',
+    width: '100%',
+    height: '10%',
+    marginTop: 7,
+    fontSize: 12,
+    fontWeight:'800',
   },
-  btn:{
-    width:'26%',
-    height:'76%',
-    marginLeft:15,
-    borderRadius:100,
-    justifyContent:'center',
-    alignItems:'center'
+  viewBtn: {
+    //backgroundColor:'red',
+    width: '100%',
+    flexDirection: 'row',
+    marginTop: 40,
+    justifyContent: 'space-evenly',
+    right: 15,
+    bottom:30
   },
-  imgBtn:{
-    width:'10%',
-    height:'10%'
+  btn: {
+    width: '23%',
+    height: '73%',
+    marginLeft: 15,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  imgBtn: {
+    width: '10%',
+    height: '10%'
   }
 });

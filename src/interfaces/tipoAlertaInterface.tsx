@@ -10,4 +10,5 @@ export interface Resp {
     id:          number;
     descripcion: string;
     estado:      number;
+    imagen: string;
 }

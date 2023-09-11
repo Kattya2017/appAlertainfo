@@ -11,7 +11,7 @@ import HomeScreen from '../screens/HomeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
 import { MenuLateralBasico } from './MenuLateralBasico';
-import AlertasScreen from '../screens/AlertasScreen';
+import MiperfilScreen from '../screens/MiperfilScreen';
 
 
 
@@ -60,7 +60,7 @@ const StackNavigator=()=> {
           <>
           <Stack.Screen name='Menu' component={MenuLateralBasico}/>
           <Stack.Screen name='Home' component={HomeScreen}/>
-          <Stack.Screen name='Alertas' component={AlertasScreen}/>
+          <Stack.Screen name='Mi perfil' component={MiperfilScreen}/>
           </>
         )
       }

@@ -107,12 +107,15 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
       >
         <Text style={{ fontFamily: 'Roboto-Bold', fontSize: 15, bottom: 20, color: '#004F79', marginTop: 30, textAlign:'center' }} >{route.params.titulo}</Text>
       </View>
+
+      
       <View
         style={{
           width:'85%',
           marginTop: 70,
         }}
       >
+
         <View
           style={{
             width: '100%',
@@ -196,20 +199,20 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
           <View style={style.titleText}>
             {
               sede !== '' ? <>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }}>* SEDE: </Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }}>SEDE: </Text>
                 <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }}>{sede} </Text>
               </> : ''
             }
             {
               organo !== '' ? <>
-                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* ORGANO:</Text>
+                <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >ORGANO:</Text>
                 <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }}>{organo} </Text>
               </> : ''
             }
             {
               unidad !== '' ?
                 <>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* UND. ORGANICA:</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >UND. ORGANICA:</Text>
                   <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }} >{unidad}</Text>
                 </>
                 : ''
@@ -217,7 +220,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
             {
               area !== '' ?
                 <>
-                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >* AREA:</Text>
+                  <Text style={{ fontFamily: 'Roboto-Bold', color: '#47525E', fontSize: 12 }} >AREA:</Text>
                   <Text style={{ fontFamily: 'Roboto-Bold', color: 'green', fontSize: 12 }} >{area}</Text>
                 </>
                 : ''
@@ -247,7 +250,6 @@ const style = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-
   },
   img: {
     width: '10%',
