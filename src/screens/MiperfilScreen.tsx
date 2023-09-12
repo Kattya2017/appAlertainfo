@@ -1,7 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react'
-import { Dimensions, StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
+import { useForm } from '../hooks/useForm';
+import alertainfoApi from '../api/alertainfoApi';
 
 
 const { width, height } = Dimensions.get('window');
@@ -10,6 +12,31 @@ interface Props extends StackScreenProps<any, any> { };
 
 const MiperfilScreen = ({ navigation }: Props) => {
 
+  const {password,form,onChange} = useForm({
+    password:''
+  })
+
+  const actualizar=async()=>{
+    try {
+      if (password==='') {
+        Alert.alert('Datos incompletos','Ingrese la nueva contraseña')
+      }
+      if (password.length<=6) {
+        Alert.alert('Datos incompletos','La contraseña nueva debe tener mas de 6 digitos') 
+      }else{
+        const data ={
+          password
+        }
+        const resp = await alertainfoApi.put('/administrado/actualizar/password',data);
+        console.log(resp.data);
+        
+        Alert.alert('Exitoso','La contraseña se actualizo con exito')
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   return (
     <View style={style.container}>
       <FondoComponent />
@@ -28,10 +55,16 @@ const MiperfilScreen = ({ navigation }: Props) => {
             placeholder='Ingrese Contraseña'
             style={style.textInput}
             placeholderTextColor={'#969FAA'}
-            secureTextEntry={true} />
+            secureTextEntry={true} 
+            value={password}
+            onChangeText={(value)=>onChange(value,'password')}
+            />
+            
         </View>
 
-        <TouchableOpacity style={style.btnLogin}>
+        <TouchableOpacity 
+          onPress={actualizar}
+          style={style.btnLogin}>
           <Text style={style.textBtn}>ACTUALIZAR</Text>
         </TouchableOpacity>
 

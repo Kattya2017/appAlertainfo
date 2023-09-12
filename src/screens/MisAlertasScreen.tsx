@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Image } from 'react-native';
@@ -32,17 +32,21 @@ const MisAlertasScreen = ({ navigation }: Props) => {
     }
   };
 
-  const iniciarAlerta = async () =>{
+  const confirmarAlerta = async (id:number,conformidad:number) =>{
     try {
+      console.log(id,conformidad);
+      const data ={
+        conformidad
+      }
+      const resp = await alertainfoApi.put(`/alerta/${id}`,data);
+      mostrarAlertas();
+      Alert.alert('Enviado','La conformidad ha sido enviado con exito')
     } catch (error) {
       console.log(error);
       
     }
   };
 
-
-  const terminarAlerta = async () =>{
-  };
   
 
   return (
@@ -88,13 +92,18 @@ const MisAlertasScreen = ({ navigation }: Props) => {
                   </Text>
 
                   <View style={style.viewBtn} >
-                    <TouchableOpacity style={{ ...style.btn, backgroundColor: '#009F0B' }} >
+                    <TouchableOpacity
+                      onPress={()=>confirmarAlerta(resp.id,1)}
+                      style={{ ...style.btn, backgroundColor: '#009F0B' }} 
+                    >
                       <Icon
                         name='checkmark-sharp'
                         size={30} color={'white'}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ ...style.btn, backgroundColor: 'red' }} >
+                    <TouchableOpacity
+                      onPress={()=>confirmarAlerta(resp.id,0)}
+                      style={{ ...style.btn, backgroundColor: 'red' }} >
                       <Icon
                         name='close-sharp'
                         size={30} color={'white'}
