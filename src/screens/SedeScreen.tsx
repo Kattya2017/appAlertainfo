@@ -5,6 +5,7 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootDrawerParams } from '../navigation/MenuLateralBasico';
 import alertainfoApi from '../api/alertainfoApi';
 import { Resp, ResultJurisdiccion } from '../interfaces/jurisdiccion.interface';
+import FondoComponent from '../components/FondoComponent';
 const { width, height } = Dimensions.get('window');
 
 interface Props extends DrawerScreenProps<RootDrawerParams, 'Sede'> { };
@@ -102,6 +103,7 @@ const SedeScreen = ({ navigation }: Props) => {
         <View
             style={styles.container}
         >
+            <FondoComponent/>
             <View
                 style={styles.containerArea}
             >
@@ -189,10 +191,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     containerArea: {
-        width: '95%',
-        height: '95%',
+        width: '90%',
+        height: '90%',
         borderRadius: 10,
         borderColor: '#004F79',
+        backgroundColor:'#fff',
         borderWidth: 3,
         //justifyContent:'center',
         alignItems: 'center'
@@ -236,7 +239,7 @@ const styles = StyleSheet.create({
     textSubtTitulo: {
         fontFamily: 'Montserrat',
         fontWeight: 'bold',
-        color: '#89919C',
+        color: '#004F79',
         marginTop: 10,
         fontSize: 16,
         marginBottom: 20
