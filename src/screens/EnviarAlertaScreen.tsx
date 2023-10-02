@@ -7,6 +7,7 @@ import alertainfoApi from '../api/alertainfoApi';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsAlerta } from '../navigation/StackAlertaNavigator';
 import { useForm } from '../hooks/useForm';
+import socket from '../socket/socketApi';
 
 
 const { width, height } = Dimensions.get('window');
@@ -75,6 +76,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
         id_tipo_alerta:route.params.tipo_alerta
       }
       const resp = await alertainfoApi.post('/alerta',data);
+      socket.emit('nueva-alerta');
       Alert.alert('Enviado',resp.data.msg)
       form.descripcion='';
       navigation.navigate('Home');
