@@ -100,27 +100,17 @@ const SedeScreen = ({ navigation }: Props) => {
     }
 
     return (
-        <View
-            style={styles.container}
-        >
+        <View style={styles.container}>
             <FondoComponent/>
-            <View
-                style={styles.containerArea}
-            >
-                <View
-                    style={styles.containerImg}
-                >
-                    <View
-                        style={styles.containerImage}
-                    >
+            <View style={styles.containerArea}>
+                <View style={styles.containerImg}>
+                    <View style={styles.containerImage}>
                         <Image
                             style={styles.imagenLogo}
                             source={require('../assets/img/marcador-de-posicion.png')}
                         />
                     </View>
-                    <Text
-                        style={styles.textSubtTitulo}
-                    >Actualizar Datos de Jurisdiccion</Text>
+                    <Text style={styles.textSubtTitulo}>Actualizar Datos de Jurisdiccion</Text>
                 </View>
                 <View
                         style={{

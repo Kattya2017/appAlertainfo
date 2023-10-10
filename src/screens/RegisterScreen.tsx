@@ -121,6 +121,7 @@ const RegisterScreen = ({navigation,route}:Props) => {
               style={style.iconText3}
             />
           </View>
+          
           <TouchableOpacity 
             style={style.btnRegister}
             onPress={onRegister}

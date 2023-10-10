@@ -3,17 +3,22 @@ import React from 'react'
 import { Dimensions, StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
 import { useForm } from '../hooks/useForm';
+import Icon from 'react-native-vector-icons/Ionicons';
 import alertainfoApi from '../api/alertainfoApi';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { RootDrawerParams } from '../navigation/MenuLateralBasico';
 
 
 const { width, height } = Dimensions.get('window');
 
-interface Props extends StackScreenProps<any, any> { };
+interface Props extends DrawerScreenProps<RootDrawerParams, any> { };
 
 const MiperfilScreen = ({ navigation }: Props) => {
 
-  const {password,form,onChange} = useForm({
-    password:''
+  const {password, telefono, anexo, form,onChange} = useForm({
+    password:'',
+    telefono:'',
+    anexo:''
   })
 
   const actualizar=async()=>{
@@ -39,7 +44,7 @@ const MiperfilScreen = ({ navigation }: Props) => {
   }
   return (
     <View style={style.container}>
-      <FondoComponent />
+      <FondoComponent/>
       <View style={style.containerGeneral}>
         <View style={style.imagenPerfil}>
           <View style={style.containerImage}>
@@ -59,8 +64,43 @@ const MiperfilScreen = ({ navigation }: Props) => {
             value={password}
             onChangeText={(value)=>onChange(value,'password')}
             />
-            
+            <Icon
+              name='lock-closed'
+              color={'#004F79'}
+              size={40}
+              style={style.iconText3}
+            />
         </View>
+        <View style={style.containerInput}>
+            <TextInput
+              placeholder='Ingrese Teléfono'
+              style={style.textInput}
+              placeholderTextColor={'#969FAA'}
+              onChangeText={(value)=>onChange(value,'telefono')}
+              value={telefono}
+            />
+            <Icon
+              name='calculator'
+              color={'#004F79'}
+              size={40}
+              style={style.iconText3}
+            />
+          </View>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder='Ingrese Anexo'
+              style={style.textInput}
+              placeholderTextColor={'#969FAA'}
+              onChangeText={(value)=>onChange(value,'anexo')}
+              value={anexo}
+              />
+            <Icon
+              name='call'
+              color={'#004F79'}
+              size={40}
+              style={style.iconText3}
+            />
+          </View>
 
         <TouchableOpacity 
           onPress={actualizar}
@@ -86,12 +126,12 @@ const style = StyleSheet.create({
   },
   containerGeneral: {
     width: '90%',
-    height: '70%',
+    height: '85%',
     borderRadius: 10,
     borderColor: '#004F79',
     backgroundColor: '#fff',
     borderWidth: 3,
-    alignItems: 'center'
+    alignItems:'center'
   },
   imagenPerfil: {
     marginTop: 20,
@@ -132,7 +172,7 @@ const style = StyleSheet.create({
     marginBottom: 20
   },
   containerInput: {
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
     alignItems: 'center',
     width: '85%',
     borderRadius: 10,
@@ -145,7 +185,7 @@ const style = StyleSheet.create({
   textInput: {
     color: '#969FAA',
     width: '75%',
-    left: 60
+    left: 50
   },
   btnLogin: {
     backgroundColor: '#004F79',
@@ -160,5 +200,9 @@ const style = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Montserrat-VariableFont_wght',
     fontWeight: 'bold',
+  },
+  iconText3:{
+    position:'absolute',
+    left:6
   },
 });

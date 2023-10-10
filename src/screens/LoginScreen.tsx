@@ -28,9 +28,10 @@ const LoginScreen = ({ navigation }:Props) => {
     
 
   const onRegister = ()=>{
+    
+    singIn({dni, password});
     console.log(dni, password);
     Keyboard.dismiss();
-    singIn({dni, password});
   };
 
 
