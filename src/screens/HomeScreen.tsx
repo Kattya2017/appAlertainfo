@@ -54,6 +54,12 @@ const HomeScreen = ({ navigation }: Props) => {
           'Actualizar su Jurisdiccion',
           'Para enviar una alerta de soporte es necesario que ingrese sus datos de su lugar de trabajo, dirijase al menu lateral y seleccione la opcion Sede',
         );
+      }
+      else if (!resp.data.resp.telefono) {
+        Alert.alert(
+          'Actualizar su numero de celular',
+          'Para enviar una alerta de soporte es necesario que ingrese su numero de celular, dirigase al menu de Perfil',
+        );
       } else {
         navigation.navigate('EnviarAlerta', {
           area: resp.data.resp.area,
