@@ -1,10 +1,8 @@
 
 import React from 'react'
 
-import { DrawerContentComponentProps, DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
-import { useWindowDimensions, View, Image } from 'react-native';
-import HomeScreen from '../screens/HomeScreen';
-import EnviarAlertaScreen from '../screens/EnviarAlertaScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Image } from 'react-native';
 import MenuInternoComponent from '../components/MenuInternoComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MisAlertasScreen from '../screens/MisAlertasScreen';
@@ -13,14 +11,14 @@ import StackAlertaNavigator from './StackAlertaNavigator';
 import MiperfilScreen from '../screens/MiperfilScreen';
 
 export type RootDrawerParams = {
-  Inicio:undefined,
-  EnviarAlerta:{
-    tipo_alerta:number,
-    tipo_area:number,
-    area:number
+  Inicio: undefined,
+  EnviarAlerta: {
+    tipo_alerta: number,
+    tipo_area: number,
+    area: number
   },
-  Misalertas:undefined,
-  Sede:undefined
+  Misalertas: undefined,
+  Sede: undefined
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
@@ -30,16 +28,32 @@ export const MenuLateralBasico = () => {
     <Drawer.Navigator
       drawerContent={(props) => <MenuInternoComponent {...props} />}
       screenOptions={{
-        drawerActiveBackgroundColor:'#004F79',
-        drawerActiveTintColor:'#fff',
+        drawerActiveBackgroundColor: '#004F79',
+        drawerActiveTintColor: '#fff',
         drawerInactiveTintColor: '#333',
-        drawerLabelStyle:{marginLeft:-20, fontSize:15},
-        unmountOnBlur:true,
-        //headerShown:false
+        drawerLabelStyle: { marginLeft: -20, fontSize: 15 },
+        unmountOnBlur: true,
+        headerStyle: {
+          backgroundColor: '#004F79',
+        },
+        headerTintColor: 'white',
+        headerTitle: () => {
+          return <>
+              <Image
+                source={require('../assets/img/menu/barra.png')}
+                style={{
+                  width: 90,
+                  height: '85%',
+                  alignItems: 'center',
+                  left: 75
+                }}
+              />
+          </>
+        }
       }}
-        
-        backBehavior="none"
-      >
+
+      backBehavior="none"
+    >
       <Drawer.Screen name="Inicio" component={StackAlertaNavigator}
         options={{
           drawerIcon: ({ color }) => (

@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
-  Image,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  Button,
   Alert,
 } from 'react-native';
 
@@ -16,15 +12,12 @@ import alertainfoApi from '../api/alertainfoApi';
 import { ResultTipoAlertas, Resp } from '../interfaces/tipoAlertaInterface';
 import BtnAlertas from '../components/BtnAlertas';
 import { Row, Col } from 'react-native-flex-grid';
-import { RootDrawerParams } from '../navigation/MenuLateralBasico';
-import { DrawerScreenProps } from '@react-navigation/drawer';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsAlerta } from '../navigation/StackAlertaNavigator';
 
 const { width, height } = Dimensions.get('window');
 
 interface Props extends StackScreenProps<RootStackParamsAlerta, 'Home'> { }
-//interface Props extends DrawerScreenProps<RootDrawerParams,'Inicio'> { };
 
 const HomeScreen = ({ navigation }: Props) => {
   const [listTipoAlerta, setListTipoAlerta] = useState<Resp[]>([]);
@@ -44,12 +37,13 @@ const HomeScreen = ({ navigation }: Props) => {
           'Para enviar una alerta de soporte es necesario que ingrese sus datos de su lugar de trabajo, dirijase al menu lateral y seleccione la opcion Sede',
         );
       }
-      else if (!resp.data.resp.telefono) {
+      else if (!resp.data.resp.telefono || !resp.data.resp.anexo) {
         Alert.alert(
-          'Actualizar su numero de celular',
-          'Para enviar una alerta de soporte es necesario que ingrese su numero de celular, dirigase al menu del Perfil',
+          'Actualizar su numero de celular y anexo',
+          'Para enviar una alerta de soporte es necesario que ingrese su numero de celular y anexo, dirigase al menu del Perfil',
         );
-      } else {
+      }
+      else {
         navigation.navigate('EnviarAlerta', {
           area: resp.data.resp.area,
           tipo_area: resp.data.resp.tipo_area,

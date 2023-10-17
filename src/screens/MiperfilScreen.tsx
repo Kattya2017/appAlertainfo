@@ -19,7 +19,7 @@ const MiperfilScreen = ({ navigation }: Props) => {
   });
 
   const [celular, setCelular] = useState('')
-
+  const [anexo, setAnexo] = useState('')
   useEffect(() => {
     mostrarUsuario();
   }, [])
@@ -29,7 +29,8 @@ const MiperfilScreen = ({ navigation }: Props) => {
     try {
       const resp = await alertainfoApi.get('/auth/administrado');
       console.log(resp.data.user.telefono);
-      setCelular(resp.data.user.telefono)
+      setCelular(resp.data.user.telefono);
+      setAnexo(resp.data.user.anexo);
       //form.telefono===celular
     } catch (error) {
       console.log(error);
@@ -38,21 +39,20 @@ const MiperfilScreen = ({ navigation }: Props) => {
   }
 
   const actualizar = async () => {
-    try {
-      console.log(celular);
-      
-      if (celular === '') {
-        Alert.alert('Datos incompletos', 'Ingrese numero de celular')
+    try {      
+      if (celular === '' || anexo==='') {
+        Alert.alert('Datos incompletos', 'Ingrese el numero celular y anexo')
       }
-      else if (celular.length !== 9) {
-        Alert.alert('Datos incompletos', 'El celular debe tener 9 digitos')
+      else if (celular.length !== 9 || anexo.length <=5) {
+        Alert.alert('Datos incompletos', 'Los campos celular y anexo, deben ser numeros validos')
       } 
       else if(celular.charAt(0)!=='9'){
         Alert.alert('Datos incorrecto', 'El numero celular debe comenzar con 9')
       }else {
         const data = {
           password,
-          telefono:celular
+          telefono:celular,
+          anexo
         }
         const resp = await alertainfoApi.put('/administrado/actualizar/password', data);
         console.log(resp.data);
@@ -112,6 +112,23 @@ const MiperfilScreen = ({ navigation }: Props) => {
           />
           <Icon
             name='calculator'
+            color={'#004F79'}
+            size={40}
+            style={style.iconText3}
+          />
+        </View>
+        <View style={style.containerInput}>
+          <TextInput
+            placeholder='Ingrese Anexo'
+            maxLength={9}
+            keyboardType='phone-pad'            
+            style={style.textInput}
+            placeholderTextColor={'#969FAA'}
+            onChangeText={(value)=>setAnexo(value)}
+            value={anexo}
+          />
+          <Icon
+            name='call-outline'
             color={'#004F79'}
             size={40}
             style={style.iconText3}
