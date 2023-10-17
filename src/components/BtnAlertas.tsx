@@ -3,12 +3,14 @@ import { StyleSheet,TouchableOpacity, Image, Text } from 'react-native'
 
 
 interface Props{
-    descripcion?: string
-    onPres?:()=>void
+    descripcion?: string,
+    onPres?:()=>void,
+    id:number,
+    imagen:string
 }
 
 
-const BtnAlertas = ({descripcion, onPres}: Props) => {
+const BtnAlertas = ({descripcion, onPres,id,imagen}: Props) => {
 
     let constante;
 
@@ -24,7 +26,7 @@ const BtnAlertas = ({descripcion, onPres}: Props) => {
         style={style.btnAlerta}
         onPress={onPres}>
             <Image
-                source={require('../assets/img/alerta/impresora-soporte.png')}
+                source={{uri:`http://192.168.0.5:4000/api/uploads/tipoalerta/${id}/${imagen}`}}
                 style={style.iconBtn}
             />
             {constante}
@@ -65,7 +67,7 @@ const style = StyleSheet.create({
         fontFamily:'Roboto-bold',
         fontWeight:'bold',
         marginTop:7,
-        width:'80%',
+        width:'70%',
         textAlign:'center'
     },
 });

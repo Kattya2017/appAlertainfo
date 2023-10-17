@@ -34,7 +34,8 @@ export const MenuLateralBasico = () => {
         drawerActiveTintColor:'#fff',
         drawerInactiveTintColor: '#333',
         drawerLabelStyle:{marginLeft:-20, fontSize:15},
-        unmountOnBlur:true
+        unmountOnBlur:true,
+        //headerShown:false
       }}
         
         backBehavior="none"

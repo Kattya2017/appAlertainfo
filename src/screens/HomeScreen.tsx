@@ -33,18 +33,7 @@ const HomeScreen = ({ navigation }: Props) => {
     mostrarTipoAlerta();
   }, []);
 
-  /*   useEffect(()=>{ navigation.setOptions({
-    headerLeft: () => (
-      <View style={style.containerBarra}>
-        <Image
-          source={require('../assets/img/menu/barra.png')}
-          style={{width:80, height: 80, left:135, marginTop:-27}}
-        />
-      </View>
-    ),
-    drawerPosition:'left',
-  });
-  }, []); */
+
 
   const verificarDatos = async (id_alerta: number, titulo: string) => {
     try {
@@ -58,7 +47,7 @@ const HomeScreen = ({ navigation }: Props) => {
       else if (!resp.data.resp.telefono) {
         Alert.alert(
           'Actualizar su numero de celular',
-          'Para enviar una alerta de soporte es necesario que ingrese su numero de celular, dirigase al menu de Perfil',
+          'Para enviar una alerta de soporte es necesario que ingrese su numero de celular, dirigase al menu del Perfil',
         );
       } else {
         navigation.navigate('EnviarAlerta', {
@@ -91,6 +80,7 @@ const HomeScreen = ({ navigation }: Props) => {
       <FondoComponent />
       <ScrollView>
         <View style={style.containerBtn}>
+        
           <Row style={{ padding: 15 }}>
             {listTipoAlerta.map((resp, index) => {
               return (
@@ -98,6 +88,8 @@ const HomeScreen = ({ navigation }: Props) => {
                   <BtnAlertas
                     onPres={() => verificarDatos(resp.id, resp.descripcion)}
                     descripcion={resp.descripcion}
+                    id={resp.id}
+                    imagen={resp.imagen?'estoymandandonombre':resp.imagen}
                   />
                 </Col>
               );
