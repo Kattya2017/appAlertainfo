@@ -43,7 +43,7 @@ const MiperfilScreen = ({ navigation }: Props) => {
       if (celular === '' || anexo==='') {
         Alert.alert('Datos incompletos', 'Ingrese el numero celular y anexo')
       }
-      else if (celular.length !== 9 || anexo.length <=5) {
+      else if (celular.length !== 9 || anexo.length <=4) {
         Alert.alert('Datos incompletos', 'Los campos celular y anexo, deben ser numeros validos')
       } 
       else if(celular.charAt(0)!=='9'){
