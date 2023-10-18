@@ -73,10 +73,9 @@ const MisAlertasScreen = ({ navigation }: Props) => {
             >
               <View style={style.containerBtn}>
                 <View style={style.imageAlertas}>
-                  <Image
-                    source={require('../assets/img/alerta/computadora-soporte.png')}
-                    style={{ width: '75%', height: '45%' }}
-                  />
+                <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.id)?resp.TipoAlertum.id:'asasas'}`}}
+                     style={{ width: '80%', height: 81 }}
+                />
                 </View>
                 <View style={style.viewText} >
                   <Text style={style.textAlerta}>
