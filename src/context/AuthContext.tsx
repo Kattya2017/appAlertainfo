@@ -100,15 +100,17 @@ export const AuthProvider = ({ children } : any) => {
                     type: 'addError',
                     payload: resp.data.msg || 'Revise la información'
                 });
+            }else{
+                await AsyncStorage.setItem('token', resp.data.token);
+                dispatch({
+                     type: 'signUp',
+                     payload: {
+                         token: resp.data.token,
+                         user: resp.data.user
+                     }
+                 });
             }
-            await AsyncStorage.setItem('token', resp.data.token);
-           dispatch({
-                type: 'signUp',
-                payload: {
-                    token: resp.data.token,
-                    user: resp.data.user
-                }
-            });
+            
         } catch (error:any) {
             console.log(error);
             dispatch({
