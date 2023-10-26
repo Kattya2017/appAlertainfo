@@ -26,7 +26,7 @@ const BtnAlertas = ({descripcion, onPres,id,imagen}: Props) => {
         style={style.btnAlerta}
         onPress={onPres}>
             <Image
-                source={{uri:`http://209.45.80.77:4001/api/uploads/tipoalerta/${id}/${imagen}+1`}}
+                source={{uri:`https://backendalertapj.gongalsoft.com/api/uploads/tipoalerta/${id}/${imagen}+1`}}
                 style={style.iconBtn}
             />
             {constante}
