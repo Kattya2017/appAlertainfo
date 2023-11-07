@@ -73,7 +73,7 @@ const MisAlertasScreen = ({ navigation }: Props) => {
             >
               <View style={style.containerBtn}>
                 <View style={style.imageAlertas}>
-                <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.id)?resp.TipoAlertum.id:'asasas'}`}}
+                <Image source={{uri:`https://backendalertapj.gongalsoft.com/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.id)?resp.TipoAlertum.id:'asasas'}`}}
                      style={{ width: '80%', height: 81 }}
                 />
                 </View>
