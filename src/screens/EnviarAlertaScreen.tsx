@@ -76,10 +76,16 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
         id_tipo_alerta:route.params.tipo_alerta
       }
       const resp = await alertainfoApi.post('/alerta',data);
-      socket.emit('nueva-alerta');
-      Alert.alert('Enviado',resp.data.msg)
-      form.descripcion='';
-      navigation.navigate('Home');
+      console.log(resp.data);
+      if (!resp.data.ok) {
+        Alert.alert('Mensaje',resp.data.msg)
+      }else{
+        socket.emit('nueva-alerta');
+        Alert.alert('Enviado',resp.data.msg)
+        form.descripcion='';
+        navigation.navigate('Home');
+      }
+      /*  */
 
     } catch (error) {
       console.log(error);
