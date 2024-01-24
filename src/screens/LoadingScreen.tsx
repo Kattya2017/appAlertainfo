@@ -9,6 +9,7 @@ export const LoadingScreen = () => {
         alignItems: 'center'
     }}>
 
+        
         <ActivityIndicator
             size={ 50 }
             color = "black"

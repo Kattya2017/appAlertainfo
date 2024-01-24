@@ -8,6 +8,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsAlerta } from '../navigation/StackAlertaNavigator';
 import { useForm } from '../hooks/useForm';
 import socket from '../socket/socketApi';
+import { LoadingScreen } from './LoadingScreen';
+import LoadingScreen2 from './LoadingScreen2';
 
 
 const { width, height } = Dimensions.get('window');
@@ -19,6 +21,7 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
   const {descripcion,form,onChange} = useForm({
     descripcion:''
   });
+  const [cargar, setCargar] = useState(false);
 
   const [sede, setSede] = useState('');
   const [organo, setOrgano] = useState('');
@@ -71,21 +74,23 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
   const enviarAlerta = async ()=>{
 
     try {
+      setCargar(true);
       const data = {
         descripcion,
         id_tipo_alerta:route.params.tipo_alerta
       }
-      const resp = await alertainfoApi.post('/alerta',data);
+      
+       const resp = await alertainfoApi.post('/alerta',data);
       console.log(resp.data);
       if (!resp.data.ok) {
         Alert.alert('Mensaje',resp.data.msg)
       }else{
         socket.emit('nueva-alerta');
+        setCargar(false)
         Alert.alert('Enviado',resp.data.msg)
         form.descripcion='';
         navigation.navigate('Home');
-      }
-      /*  */
+      } 
 
     } catch (error) {
       console.log(error);
@@ -98,6 +103,8 @@ const EnviarAlertaScreen = ({ navigation, route }: Props) => {
     form.descripcion='';
     navigation.navigate('Home');
   }
+
+  if(cargar===true) return <LoadingScreen2/>
 
   return (
     <View style={style.container}>
